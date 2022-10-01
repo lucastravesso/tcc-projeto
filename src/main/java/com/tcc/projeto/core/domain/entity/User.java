@@ -5,10 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,7 +21,7 @@ import javax.persistence.Table;
 @SuperBuilder
 @Entity
 @Table(name = "Usuario")
-public class User extends AbstractPersistenceDomain {
+public class User extends AbstractPersistenceDomain implements UserDetails {
 
     @Column(name = "Usuario")
     protected String user;
@@ -31,4 +35,40 @@ public class User extends AbstractPersistenceDomain {
     @Column(name = "Cnpj")
     protected String cnpj;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Profile> profiles = new HashSet<>();
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.profiles;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public UsernamePasswordAuthenticationToken converter() {
+        return new UsernamePasswordAuthenticationToken(email, password);
+    }
 }
