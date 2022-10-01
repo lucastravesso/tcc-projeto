@@ -31,7 +31,7 @@ public class UserController {
             userFacade.inactiveAccount(uuid);
             return ResponseEntity.status(HttpStatus.OK).build();
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
 

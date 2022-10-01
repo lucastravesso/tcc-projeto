@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
             address.setActive(false);
             addressRepository.save(address);
         }
+        userRepository.save(user.get());
         return user.get();
     }
 
