@@ -28,5 +28,5 @@ public abstract class AbstractPersistenceDomain extends AbstractDomainEntity {
     protected UUID id;
 
     @Column(name = "Ativo")
-    protected boolean ativo;
+    protected boolean active;
 }

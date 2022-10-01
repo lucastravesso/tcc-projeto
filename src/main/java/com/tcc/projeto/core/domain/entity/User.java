@@ -22,6 +22,9 @@ public class User extends AbstractPersistenceDomain {
     @Column(name = "Usuario")
     protected String user;
 
+    @Column(name = "Email")
+    protected String email;
+
     @Column(name = "Senha")
     protected String password;
 
