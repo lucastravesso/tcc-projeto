@@ -34,5 +34,14 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<UserDTO> updateteUser(@RequestHeader("id") UUID id, @RequestBody UserDTO userDTO){
+        if(userDTO != null) {
+            userFacade.updateUser(userDTO, id);
+            return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
+        }
+        return ResponseEntity.status((HttpStatus.BAD_REQUEST)).build();
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.tcc.projeto.inbound.facade.impl;
 
+import com.tcc.projeto.core.domain.entity.User;
 import com.tcc.projeto.core.service.UserService;
 import com.tcc.projeto.inbound.dto.UserDTO;
 import com.tcc.projeto.inbound.facade.UserFacade;
@@ -26,5 +27,12 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public UserDTO inactiveAccount(UUID id) {
         return userMapper.toDto(userService.inactiveAccount(id));
+    }
+
+    @Override
+    public UserDTO updateUser(UserDTO userDTO, UUID id) {
+        User user = userMapper.toEntity(userDTO);
+
+        return userMapper.toDto(userService.updateUser(user, id));
     }
 }

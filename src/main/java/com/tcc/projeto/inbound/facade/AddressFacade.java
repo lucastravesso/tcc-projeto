@@ -8,4 +8,5 @@ public interface AddressFacade {
 
     AddressDTO createAddress(AddressDTO addressDTO, UUID id);
 
+    AddressDTO inactiveAccount(UUID uuid);
 }

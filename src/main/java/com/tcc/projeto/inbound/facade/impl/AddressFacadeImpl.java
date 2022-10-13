@@ -22,4 +22,9 @@ public class AddressFacadeImpl implements AddressFacade {
     public AddressDTO createAddress(AddressDTO addressDTO, UUID id) {
         return addressMapper.toDto(addressService.createAddress(addressMapper.toEntity(addressDTO), id));
     }
+
+    @Override
+    public AddressDTO inactiveAccount(UUID id) {
+        return addressMapper.toDto(addressService.inactiveAccount(id));
+    }
 }

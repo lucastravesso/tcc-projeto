@@ -33,4 +33,21 @@ public class AddressServiceImpl implements AddressService {
         return null;
 
     }
+
+    @Override
+    public Address inactiveAccount(UUID id) {
+        Optional<User> user = userRepository.findById(id);
+        // indepente se achaar o usuario ou nao, ira retornar  status code 200
+        // mais a diante seria bom nos pensarmos em uma excessao personalizada
+        if (user.isEmpty()) {
+            return null;
+        }
+        Address address = addressRepository.findByUserId(user.get().getId());
+        if(address != null){
+            address.setActive(false);
+            addressRepository.save(address);
+        }
+        return address;
+
+    }
 }

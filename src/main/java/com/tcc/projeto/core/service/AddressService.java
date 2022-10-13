@@ -6,5 +6,7 @@ import java.util.UUID;
 
 public interface AddressService {
 
-    Address  createAddress(Address address, UUID id);
+    Address createAddress(Address address, UUID id);
+
+    Address inactiveAccount(UUID id);
 }

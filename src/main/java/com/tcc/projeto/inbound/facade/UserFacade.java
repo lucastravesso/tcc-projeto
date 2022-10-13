@@ -9,4 +9,6 @@ public interface UserFacade {
     UserDTO createUser(UserDTO userDTO);
 
     UserDTO inactiveAccount(UUID id);
+
+    UserDTO updateUser(UserDTO userDTO, UUID id);
 }
