@@ -1,7 +1,6 @@
 package com.tcc.projeto.inbound.controller;
 
 import com.tcc.projeto.inbound.dto.AddressDTO;
-import com.tcc.projeto.inbound.dto.UserDTO;
 import com.tcc.projeto.inbound.facade.AddressFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,5 +23,14 @@ public class AddressController {
             return ResponseEntity.status(HttpStatus.CREATED).body(addressDTO);
         }
         return ResponseEntity.status((HttpStatus.BAD_REQUEST)).build();
+    }
+
+    @PostMapping("/inactive")
+    public ResponseEntity<?> inactiveUser(@RequestHeader("id") UUID uuid){
+        if(uuid != null){
+            addressFacade.inactiveAccount(uuid);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 }

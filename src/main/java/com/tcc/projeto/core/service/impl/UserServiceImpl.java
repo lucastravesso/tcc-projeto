@@ -8,7 +8,6 @@ import com.tcc.projeto.core.domain.repository.ProfileRepository;
 import com.tcc.projeto.core.domain.repository.UserRepository;
 import com.tcc.projeto.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -61,4 +60,13 @@ public class UserServiceImpl implements UserService {
         return user.get();
     }
 
+    @Override
+    public User updateUser(User userDto, UUID id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            return null;
+        }
+        user.get().setUser(userDto.getUser());
+        return userRepository.save(user.get());
+    }
 }
