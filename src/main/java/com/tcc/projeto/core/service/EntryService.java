@@ -6,6 +6,6 @@ import java.util.UUID;
 
 public interface EntryService {
 
-    Entry makeEntry(Entry entry, UUID idUser);
+    Entry makeEntry(Entry entry, UUID idUser, UUID idBalanceSheet);
 
 }

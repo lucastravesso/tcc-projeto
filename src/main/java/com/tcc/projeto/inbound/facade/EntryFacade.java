@@ -7,6 +7,6 @@ import java.util.UUID;
 
 public interface EntryFacade {
 
-    EntryDTO makeEntry(EntryDTO entry, UUID idUser);
+    EntryDTO makeEntry(EntryDTO entry, UUID idUser, UUID idBalanceSheet);
 
 }

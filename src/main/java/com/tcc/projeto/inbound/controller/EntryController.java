@@ -21,12 +21,13 @@ public class EntryController {
 
     @PostMapping("/new")
     private ResponseEntity<EntryDTO> makeEntry(@RequestBody EntryDTO entryDTO,
-                                               @RequestHeader("idUser") UUID idUser){
+                                               @RequestHeader("idUser") UUID idUser,
+                                               @RequestHeader("idBalanceSheet") UUID idBalanceSheet){
 
-        if(entryDTO == null || idUser == null){
+        if(entryDTO == null || idUser == null || idBalanceSheet == null){
             throw EntryException.EntryEX001_NullOrEmptyEntry();
         }
-        entryFacade.makeEntry(entryDTO, idUser);
+        entryFacade.makeEntry(entryDTO, idUser, idBalanceSheet);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

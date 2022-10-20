@@ -19,7 +19,7 @@ public class EntryFacadeImpl implements EntryFacade {
     private EntryMapper entryMapper;
 
     @Override
-    public EntryDTO makeEntry(EntryDTO entry, UUID idUser) {
-        return entryMapper.toDto(entryService.makeEntry(entryMapper.toEntity(entry), idUser));
+    public EntryDTO makeEntry(EntryDTO entry, UUID idUser, UUID idBalanceSheet) {
+        return entryMapper.toDto(entryService.makeEntry(entryMapper.toEntity(entry), idUser, idBalanceSheet));
     }
 }
