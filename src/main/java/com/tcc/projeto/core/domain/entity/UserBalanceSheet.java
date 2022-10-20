@@ -5,9 +5,6 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -17,15 +14,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @Entity
-public class UserEntry extends AbstractPersistenceDomain  {
+public class UserBalanceSheet extends AbstractPersistenceDomain  {
 
     @Type(type = "uuid-char")
     @Column(name = "IdUsuario")
     private UUID idUser;
 
     @Type(type = "uuid-char")
-    @Column(name = "IdEntrada")
-    private UUID idEntry;
+    @Column(name = "IdBalancoPatrimonial")
+    private UUID idBalanceSheet;
 
     @Column(name = "DataCriacao")
     private Date createDate;

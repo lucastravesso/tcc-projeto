@@ -21,7 +21,7 @@ public class EntryController {
 
     @PostMapping("/new")
     private ResponseEntity<EntryDTO> makeEntry(@RequestBody EntryDTO entryDTO,
-                                               @RequestHeader(" idUser") UUID idUser){
+                                               @RequestHeader("idUser") UUID idUser){
 
         if(entryDTO == null || idUser == null){
             throw EntryException.EntryEX001_NullOrEmptyEntry();

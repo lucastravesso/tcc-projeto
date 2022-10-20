@@ -1,8 +1,6 @@
 package com.tcc.projeto.core.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,17 +9,16 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "Lancamento")
+@Table(name = "Entrada")
 public class Entry extends AbstractPersistenceDomain {
 
-    @OneToOne
     private Category category;
 
-    @OneToOne
     private SubCategory subCategory;
 
     @Column(name = "data")

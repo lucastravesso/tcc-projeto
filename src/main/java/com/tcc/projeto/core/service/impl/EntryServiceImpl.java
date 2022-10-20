@@ -8,6 +8,7 @@ import com.tcc.projeto.core.service.EntryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -21,6 +22,8 @@ public class EntryServiceImpl implements EntryService {
 
     @Override
     public Entry makeEntry(Entry entry, UUID idUser) {
+        entry.setActive(true);
+        entry.setReleaseDate(new Date());
         Entry persistenceEntry = entryRepository.save(entry);
         userEntryRepository.save(UserEntry.builder().idEntry(persistenceEntry.getId()).idUser(idUser).build());
         return entry;
