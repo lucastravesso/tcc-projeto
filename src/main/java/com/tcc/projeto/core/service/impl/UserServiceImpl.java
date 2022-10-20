@@ -7,6 +7,8 @@ import com.tcc.projeto.core.domain.repository.AddressRepository;
 import com.tcc.projeto.core.domain.repository.ProfileRepository;
 import com.tcc.projeto.core.domain.repository.UserRepository;
 import com.tcc.projeto.core.service.UserService;
+import com.tcc.projeto.core.verifier.Validate;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,12 +63,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User userDto, UUID id) {
-        Optional<User> user = userRepository.findById(id);
-        if (user.isEmpty()) {
-            return null;
+    public User updateUser(User user, UUID id) {
+        Optional<User> userFound = userRepository.findById(id);
+        if (userFound.isPresent()) {
+            if (Validate.verificaAtributo(user.getUser())) userFound.get().setUser(user.getUser());
+            if (Validate.verificaAtributo(user.getCnpj())) userFound.get().setCnpj(user.getCnpj());
+            if (Validate.verificaAtributo(user.getEmail())) userFound.get().setEmail(user.getEmail());
+            return userRepository.save(userFound.get());
         }
-        user.get().setUser(userDto.getUser());
-        return userRepository.save(user.get());
+        return null;
     }
+
+
 }

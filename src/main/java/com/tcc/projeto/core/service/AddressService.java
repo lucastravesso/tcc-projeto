@@ -8,5 +8,5 @@ public interface AddressService {
 
     Address createAddress(Address address, UUID id);
 
-    Address inactiveAccount(UUID id);
+    Address updateAddress(Address address, UUID id);
 }

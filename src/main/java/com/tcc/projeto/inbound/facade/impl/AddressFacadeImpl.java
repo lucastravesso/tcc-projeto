@@ -1,5 +1,6 @@
 package com.tcc.projeto.inbound.facade.impl;
 
+import com.tcc.projeto.core.domain.entity.Address;
 import com.tcc.projeto.core.service.AddressService;
 import com.tcc.projeto.inbound.dto.AddressDTO;
 import com.tcc.projeto.inbound.facade.AddressFacade;
@@ -24,7 +25,7 @@ public class AddressFacadeImpl implements AddressFacade {
     }
 
     @Override
-    public AddressDTO inactiveAccount(UUID id) {
-        return addressMapper.toDto(addressService.inactiveAccount(id));
+    public AddressDTO updateAddress(AddressDTO addressDTO, UUID id) {
+        return addressMapper.toDto(addressService.updateAddress(addressMapper.toEntity(addressDTO), id));
     }
 }

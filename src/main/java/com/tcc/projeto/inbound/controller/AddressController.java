@@ -25,10 +25,10 @@ public class AddressController {
         return ResponseEntity.status((HttpStatus.BAD_REQUEST)).build();
     }
 
-    @PostMapping("/inactive")
-    public ResponseEntity<?> inactiveUser(@RequestHeader("id") UUID uuid){
+    @PutMapping("/update")
+    public ResponseEntity<?> updateAddress(@RequestBody AddressDTO addressDTO, @RequestHeader("id") UUID uuid){
         if(uuid != null){
-            addressFacade.inactiveAccount(uuid);
+            addressFacade.updateAddress(addressDTO, uuid);
             return ResponseEntity.status(HttpStatus.OK).build();
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

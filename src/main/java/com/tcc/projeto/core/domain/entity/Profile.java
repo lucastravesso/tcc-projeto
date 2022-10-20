@@ -14,7 +14,6 @@ public class Profile implements GrantedAuthority {
 
     private static final long serialVersionUID = 1L;
 
-
     @Id
     @GeneratedValue(generator = "UUID")
     @Type(type = "uuid-char")
