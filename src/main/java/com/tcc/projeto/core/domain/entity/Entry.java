@@ -1,6 +1,6 @@
 package com.tcc.projeto.core.domain.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,16 +8,18 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "lancamento")
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "Entrada")
 public class Entry extends AbstractPersistenceDomain {
 
-    @OneToOne
     private Category category;
 
-    @OneToOne
     private SubCategory subCategory;
 
     @Column(name = "data")
@@ -28,5 +30,8 @@ public class Entry extends AbstractPersistenceDomain {
 
     @Column(name = "complemento")
     private String complement;
+
+    @Column(name = "idBalancoPatrimonial")
+    private UUID idBalanceSheet;
 
 }
