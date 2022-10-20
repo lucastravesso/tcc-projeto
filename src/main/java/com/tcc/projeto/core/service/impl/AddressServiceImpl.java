@@ -5,6 +5,7 @@ import com.tcc.projeto.core.domain.entity.User;
 import com.tcc.projeto.core.domain.repository.AddressRepository;
 import com.tcc.projeto.core.domain.repository.UserRepository;
 import com.tcc.projeto.core.service.AddressService;
+import com.tcc.projeto.core.verifier.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,19 +36,18 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address inactiveAccount(UUID id) {
-        Optional<User> user = userRepository.findById(id);
-        // indepente se achaar o usuario ou nao, ira retornar  status code 200
-        // mais a diante seria bom nos pensarmos em uma excessao personalizada
-        if (user.isEmpty()) {
-            return null;
-        }
-        Address address = addressRepository.findByUserId(user.get().getId());
-        if(address != null){
-            address.setActive(false);
-            addressRepository.save(address);
-        }
-        return address;
+    public Address updateAddress(Address address, UUID id) {
 
+        Optional<Address> addressFound = addressRepository.findById(id);
+        if (addressFound.isPresent()) {
+            if (Validate.verificaAtributo(address.getCep())) addressFound.get().setCep(address.getCep());
+            if (Validate.verificaAtributo(address.getCity())) addressFound.get().setCity(address.getCity());
+            if (Validate.verificaAtributo(address.getComplement())) addressFound.get().setComplement(address.getComplement());
+            if (Validate.verificaAtributo(address.getLogradouro())) addressFound.get().setLogradouro(address.getLogradouro());
+            if (Validate.verificaAtributo(address.getNumber())) addressFound.get().setNumber(address.getNumber());
+            if (Validate.verificaAtributo(address.getState())) addressFound.get().setState(address.getState());
+            return addressRepository.save(addressFound.get());
+        }
+        return null;
     }
 }

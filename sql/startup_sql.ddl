@@ -12,6 +12,7 @@ CREATE TABLE `usuario` (
 CREATE TABLE `endereco` (
   `id` varchar(255) NOT NULL,
   `ativo` bit(1) DEFAULT NULL,
+  `logradouro` varchar(255) DEFAULT NULL,
   `cep` varchar(255) DEFAULT NULL,
   `cidade` varchar(255) DEFAULT NULL,
   `complemento` varchar(255) DEFAULT NULL,
