@@ -1,10 +1,13 @@
 package com.tcc.projeto.core.domain.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -32,6 +35,7 @@ public class Entry extends AbstractPersistenceDomain {
     private String complement;
 
     @Column(name = "idBalancoPatrimonial")
+    @Type(type = "uuid-char")
     private UUID idBalanceSheet;
 
 }

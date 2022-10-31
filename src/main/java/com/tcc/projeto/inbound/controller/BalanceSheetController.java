@@ -1,5 +1,6 @@
 package com.tcc.projeto.inbound.controller;
 
+import com.tcc.projeto.core.domain.entity.BalanceSheet;
 import com.tcc.projeto.core.exception.EntryException;
 import com.tcc.projeto.inbound.dto.BalanceSheetDTO;
 import com.tcc.projeto.inbound.dto.EntryDTO;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -28,6 +30,13 @@ public class BalanceSheetController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-
+    @GetMapping("/list/{id}")
+    private ResponseEntity<List<BalanceSheetDTO>> listAllByUserId(@PathVariable("id") UUID idUser){
+        if(idUser == null){
+            throw EntryException.EntryEX001_NullOrEmptyEntry();
+        }
+        List<BalanceSheetDTO> response = balanceSheetFacade.list(idUser);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 
 }

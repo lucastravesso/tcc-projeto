@@ -8,6 +8,9 @@ import com.tcc.projeto.core.service.BalanceSheetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -24,7 +27,16 @@ public class BalanceSheetServiceImpl implements BalanceSheetService {
         BalanceSheet balanceSheet = new BalanceSheet();
         balanceSheet.setActive(true);
         BalanceSheet toTakeId = balanceSheetRepository.save(balanceSheet);
-        userBalanceSheetRepository.save(UserBalanceSheet.builder().idBalanceSheet(toTakeId.getId()).idUser(idUser).build());
+        userBalanceSheetRepository.save(UserBalanceSheet.builder().createDate(new Date()).idBalanceSheet(toTakeId.getId()).idUser(idUser).build());
         return toTakeId;
+    }
+
+    @Override
+    public List<BalanceSheet> list(UUID idUser) {
+        List<BalanceSheet> response = balanceSheetRepository.listByUserId(idUser);
+        if(response.isEmpty()){
+            return new ArrayList<>();
+        }
+        return response;
     }
 }

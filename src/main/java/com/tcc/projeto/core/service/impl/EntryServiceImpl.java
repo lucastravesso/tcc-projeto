@@ -37,7 +37,7 @@ public class EntryServiceImpl implements EntryService {
         entry.setReleaseDate(new Date());
         entry.setIdBalanceSheet(idBalanceSheet);
         Entry persistenceEntry = entryRepository.save(entry);
-        userEntryRepository.save(UserEntry.builder().idEntry(persistenceEntry.getId()).idUser(idUser).build());
+        userEntryRepository.save(UserEntry.builder().idEntry(persistenceEntry.getId()).createDate(new Date()).idUser(idUser).build());
         return entry;
     }
 }
